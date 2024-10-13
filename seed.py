@@ -1,15 +1,8 @@
 import csv
-from models import db, Guest
-from app import app
 
 def seed_database():
-    with app.app_context():
-        with open('data/guests.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                guest = Guest(name=row['name'], occupation=row['occupation'])
-                db.session.add(guest)
-            db.session.commit()
-
-if __name__ == '__main__':
-    seed_database()
+    with open('guests.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            guest = Guest(name=row['Raw_Guest_List'], occupation=row['GoogleKnowledge_Occupation'])
+            # Your code to save the guest...
