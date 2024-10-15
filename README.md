@@ -32,7 +32,6 @@ To set up the project locally, follow these steps:
    git clone https://github.com/yourusername/lateshow-api.git
 
 2. **Navigate to the project directory**:
-
    ```bash
 cd lateshow
 
