@@ -57,6 +57,140 @@ cd lateshow
 **Usage**
 Once the application is running, you can interact with the API using tools like Postman or curl.
 
+**Endpoints**
+**GET /episodes**
+- Returns a list of all episodes.
+
+- URL: /episodes
+- Method: GET
+- Response:
+ ```json
+
+[
+  {
+    "id": 1,
+    "date": "1/11/99",
+    "number": 1
+  },
+  {
+    "id": 2,
+    "date": "1/12/99",
+    "number": 2
+  }
+]
+
+GET /episodes/
+Returns details of a specific episode, including guest appearances.
+
+- URL: /episodes/:id
+
+- Method: GET
+
+- Response (if the episode exists):
+
+  ```json
+Copy code
+{
+  "id": 1,
+  "date": "1/11/99",
+  "number": 1,
+  "appearances": [
+    {
+      "episode_id": 1,
+      "guest": {
+        "id": 1,
+        "name": "Michael J. Fox",
+        "occupation": "actor"
+      },
+      "guest_id": 1,
+      "id": 1,
+      "rating": 4
+    }
+  ]
+}
+
+- Response (if the episode does not exist):
+
+  ```json
+
+{
+  "error": "Episode not found"
+}
+
+
+**GET /guests**
+Returns a list of all guests.
+
+- URL: /guests
+- Method: GET
+- Response:
+
+   ```json 
+
+[
+  {
+    "id": 1,
+    "name": "Michael J. Fox",
+    "occupation": "actor"
+  },
+  {
+    "id": 2,
+    "name": "Sandra Bernhard",
+    "occupation": "Comedian"
+  },
+  {
+    "id": 3,
+    "name": "Tracey Ullman",
+    "occupation": "television actress"
+  }
+]
+
+
+**POST /appearances**
+Creates a new appearance that links an existing guest to an episode.
+
+- URL: /appearances
+
+- Method : POST
+
+- Request Body :
+
+  ```json
+
+{
+  "rating": 5,
+  "episode_id": 1,
+  "guest_id": 1
+}
+Response (if created successfully):
+
+  ```json
+
+{
+  "id": 162,
+  "rating": 5,
+  "guest_id": 1,
+  "episode_id": 1,
+  "episode": {
+    "id": 1,
+    "date": "1/11/99",
+    "number": 1
+  },
+  "guest": {
+    "id": 1,
+    "name": "Michael J. Fox",
+    "occupation": "actor"
+  }
+}
+
+**Response (if validation fails)**:
+
+   ```json
+
+{
+  "errors": ["validation errors"]
+}
+
 **Technologies**
 - Python
 - Flask (for the web framework)
